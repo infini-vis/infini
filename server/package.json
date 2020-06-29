@@ -1,0 +1,63 @@
+{
+  "name": "infini-server",
+  "version": "0.5.0",
+  "author": "Ruiyi <ruiyi.jiang@zilliz.com>",
+  "description": "Nodejs API server based on Koa",
+  "contributors": [
+    "Jiang Ruiyi <ruiyi.jiang@zilliz.com>",
+    "An Zhen <zhen.an@zilliz.com>",
+    "Chen Zizhao <zizhao.chen@zilliz.com>"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "build": "webpack",
+    "start": "ts-node-dev --respawn --transpileOnly src/index.ts",
+    "test": "NODE_ENV=test jest --detectOpenHandles --verbose",
+    "coverage": "NODE_ENV=test jest --detectOpenHandles --verbose --coverage"
+  },
+  "dependencies": {
+    "@koa/cors": "2",
+    "class-transformer": "^0.2.3",
+    "class-validator": "^0.11.0",
+    "jsonwebtoken": "^8.5.1",
+    "koa": "^2.11.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-helmet": "^5.2.0",
+    "koa-json": "^2.0.2",
+    "koa-jwt": "^3.6.0",
+    "koa-logger": "^3.2.1",
+    "koa-router": "^7.4.0",
+    "pg": "^7.14.0",
+    "reflect-metadata": "^0.1.13"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.23",
+    "@types/jsonwebtoken": "^8.3.5",
+    "@types/koa": "^2.11.0",
+    "@types/koa-bodyparser": "^4.3.0",
+    "@types/koa-json": "^2.0.18",
+    "@types/koa-jwt": "^3.3.0",
+    "@types/koa-logger": "^3.1.1",
+    "@types/koa-router": "^7.0.42",
+    "@types/node": "^12.12.14",
+    "@types/reflect-metadata": "^0.1.0",
+    "chalk": "^3.0.0",
+    "jest": "^24.9.0",
+    "jest-extended": "^0.11.2",
+    "supertest": "^4.0.2",
+    "ts-jest": "^24.2.0",
+    "ts-loader": "^6.2.1",
+    "ts-node": "^8.5.3",
+    "ts-node-dev": "^1.0.0-pre.44",
+    "typescript": "^3.7.2",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "setupFilesAfterEnv": [
+      "jest-extended"
+    ]
+  }
+}

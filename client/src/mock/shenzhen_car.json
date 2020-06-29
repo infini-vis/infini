@@ -1,0 +1,248 @@
+{
+  "id": 5,
+  "demo": true,
+  "title": "深圳营运车辆分析",
+  "userId": "infini",
+  "configs": [
+    {
+      "type": "PointMap",
+      "title": "营运车辆数据分析",
+      "source": "szx_vehicles",
+      "layout": {
+        "w": 15,
+        "h": 30,
+        "x": 0,
+        "y": 0,
+        "i": "id_atwqk26f9x9",
+        "minW": 3,
+        "minH": 1,
+        "moved": false,
+        "static": false
+      },
+      "dimensions": [],
+      "measures": [
+        {
+          "type": "float8",
+          "value": "gps_longitude",
+          "label": "gps_longitude",
+          "as": "lon",
+          "format": "auto",
+          "isCustom": false,
+          "isRecords": false,
+          "expression": "gis_mapping_lon",
+          "name": "y0"
+        },
+        {
+          "type": "float8",
+          "value": "gps_latitude",
+          "label": "gps_latitude",
+          "as": "lat",
+          "format": "auto",
+          "isCustom": false,
+          "isRecords": false,
+          "expression": "gis_mapping_lat",
+          "name": "y1"
+        },
+        {
+          "type": "float8",
+          "value": "car_speed",
+          "label": "car_speed",
+          "as": "color",
+          "format": "auto",
+          "isCustom": false,
+          "isRecords": false,
+          "expression": "project",
+          "name": "y2"
+        }
+      ],
+      "filter": {},
+      "selfFilter": {},
+      "width": 762,
+      "height": 1092.666748046875,
+      "isServerRender": true,
+      "mapTheme": "mapbox://styles/mapbox/dark-v9",
+      "zoom": 7.7987535377397,
+      "pointSize": 3,
+      "points": 1000000,
+      "popupItems": [],
+      "colorKey": "blue_green_yellow",
+      "id": "id_atwqk26f9x9",
+      "center": {"lng": 113.88605696219702, "lat": 22.89131949760855},
+      "bounds": {
+        "_sw": {"lng": 112.68296514816745, "lat": 21.292390666721914},
+        "_ne": {"lng": 115.08914877623181, "lat": 24.471628402080682}
+      },
+      "ruler": {"min": 0, "max": 65535},
+      "rulerBase": {"min": 0, "max": 65535}
+    },
+    {
+      "type": "LineChart",
+      "title": "车速-时间分析",
+      "source": "szx_vehicles",
+      "layout": {
+        "w": 15,
+        "h": 15,
+        "x": 15,
+        "y": 0,
+        "i": "id_flngi68ewie",
+        "minW": 3,
+        "minH": 1,
+        "moved": false,
+        "static": false
+      },
+      "dimensions": [
+        {
+          "label": "system_time",
+          "short": "xaxis",
+          "value": "system_time",
+          "type": "timestamp",
+          "format": "auto",
+          "as": "x",
+          "isBinned": true,
+          "extract": false,
+          "min": "Mon Oct 08 00:00:01 2018",
+          "max": "Thu Oct 11 23:59:59 2018",
+          "extent": ["Mon Oct 08 00:00:01 2018", "Thu Oct 11 23:59:59 2018"],
+          "staticRange": ["Mon Oct 08 00:00:01 2018", "Thu Oct 11 23:59:59 2018"],
+          "timeBin": "hour",
+          "binningResolution": "1h"
+        }
+      ],
+      "measures": [
+        {
+          "type": "int4",
+          "value": "gps_speed",
+          "label": "gps_speed",
+          "as": "measure_04b8ms9m252c",
+          "format": "auto",
+          "isCustom": false,
+          "isRecords": false,
+          "expression": "avg",
+          "name": "y0"
+        }
+      ],
+      "colorItems": [
+        {
+          "color": "#37A2DA",
+          "as": "measure_04b8ms9m252c",
+          "label": "gps_speed",
+          "isRecords": false,
+          "value": "gps_speed"
+        }
+      ],
+      "filter": {},
+      "selfFilter": {},
+      "isShowRange": false,
+      "id": "id_flngi68ewie"
+    },
+    {
+      "type": "TableChart",
+      "title": "车速-时间分析",
+      "source": "szx_vehicles",
+      "layout": {
+        "w": 7.5,
+        "h": 15,
+        "x": 15,
+        "y": 15,
+        "i": "id_2ycx36n7p9k",
+        "minW": 3,
+        "minH": 1,
+        "moved": false,
+        "static": false
+      },
+      "dimensions": [
+        {
+          "label": "system_time",
+          "short": "colname",
+          "value": "system_time",
+          "type": "timestamp",
+          "format": "auto",
+          "as": "gps_speed_6fg79pm4xsr",
+          "isBinned": true,
+          "extract": false,
+          "extent": ["Mon Oct 08 00:00:01 2018", "Thu Oct 11 23:59:59 2018"],
+          "staticRange": ["Mon Oct 08 00:00:01 2018", "Thu Oct 11 23:59:59 2018"],
+          "timeBin": "day",
+          "binningResolution": "1d"
+        }
+      ],
+      "measures": [],
+      "colorItems": [],
+      "filter": {},
+      "selfFilter": {},
+      "limit": 50,
+      "sort": {"name": "", "order": "descending"},
+      "id": "id_2ycx36n7p9k"
+    },
+    {
+      "type": "TableChart",
+      "title": "车辆速度",
+      "source": "szx_vehicles",
+      "layout": {
+        "w": 7.5,
+        "h": 15,
+        "x": 22.5,
+        "y": 15,
+        "i": "id_rbi9zi2hnr9",
+        "minW": 3,
+        "minH": 1,
+        "moved": false,
+        "static": false
+      },
+      "dimensions": [
+        {
+          "label": "car_num",
+          "short": "colname",
+          "value": "car_num",
+          "type": "text",
+          "format": "auto",
+          "as": "car_num_gmocro0qw2m"
+        }
+      ],
+      "measures": [
+        {
+          "type": "int",
+          "value": "*",
+          "label": "Records",
+          "as": "countval",
+          "format": "auto",
+          "isCustom": false,
+          "isRecords": true,
+          "expression": "count",
+          "name": "y0"
+        },
+        {
+          "type": "float8",
+          "value": "car_speed",
+          "label": "car_speed",
+          "as": "measure_9jtkqtpciiq",
+          "format": "auto",
+          "isCustom": false,
+          "isRecords": false,
+          "expression": "avg",
+          "name": "y1"
+        },
+        {
+          "type": "float8",
+          "value": "car_speed",
+          "label": "car_speed",
+          "as": "measure_4z54yw170vo",
+          "format": "auto",
+          "isCustom": false,
+          "isRecords": false,
+          "expression": "max",
+          "name": "y2"
+        }
+      ],
+      "colorItems": [],
+      "filter": {},
+      "selfFilter": {},
+      "limit": 50,
+      "sort": {"name": "", "order": "descending"},
+      "id": "id_rbi9zi2hnr9"
+    }
+  ],
+  "createdAt": "Thu Jun  6 12:12:12 2019",
+  "modifyAt": "Thu Jun  6 12:12:12 2019",
+  "sources": ["sha_truck", "szx_vehicles", "nyc_taxi"]
+}
