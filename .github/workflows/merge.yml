@@ -79,10 +79,10 @@ jobs:
       - name: Docker Build
         run: |
           cd client
-          docker build -t infinivis/infinivis-client:dev --build-arg VERSION=dev .
+          docker build -t infinivis/infini-client:dev --build-arg VERSION=dev .
 
       - name: Docker Push lastest
-        run: docker push infinivis/infinivis-client:dev
+        run: docker push infinivis/infini-client:dev
 
   # This workflow contains a single job called "build"
   build-Server:
@@ -100,7 +100,7 @@ jobs:
       - name: Docker Build
         run: |
           cd server
-          docker build -t infinivis/infinivis-server:dev --build-arg VERSION=dev .
+          docker build -t infinivis/infini-server:dev --build-arg VERSION=dev .
 
       - name: Docker Push lastest
-        run: docker push infinivis/infinivis-server:dev
+        run: docker push infinivis/infini-server:dev
