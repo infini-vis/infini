@@ -11,7 +11,6 @@ import {
 import {Status} from '../types/Editor';
 import {getColType} from './ColTypes';
 import {isValidValue} from './Helpers';
-import {DEFAULT_ZOOM, DefaultMapTheme} from '../widgets/Utils/Map';
 import {DEFAULT_SORT} from '../components/settingComponents/Sort';
 
 export const QueryCount = 10;
@@ -140,39 +139,6 @@ export const convertConfig = (config: any, widgetType: string) => {
     case WIDGET.TABLECHART:
       initConfig.limit = 50;
       initConfig.sort = DEFAULT_SORT;
-      break;
-    case WIDGET.SCATTERCHART:
-      initConfig.width = 850;
-      initConfig.height = 400;
-      initConfig.pointSize = 3;
-      initConfig.points = 1000000;
-      initConfig.popupItems = [];
-      initConfig.isServerRender = true;
-      break;
-    case WIDGET.POINTMAP:
-      initConfig.width = 850;
-      initConfig.height = 400;
-      initConfig.isServerRender = true;
-      initConfig.mapTheme = DefaultMapTheme.value;
-      initConfig.zoom = DEFAULT_ZOOM;
-      initConfig.pointSize = 3;
-      initConfig.points = 1000000;
-      initConfig.popupItems = [];
-      break;
-    case WIDGET.GEOHEATMAP:
-      initConfig.width = 810;
-      initConfig.height = 465;
-      initConfig.isServerRender = true;
-      initConfig.colorKey = 'green_yellow_red';
-      initConfig.mapTheme = DefaultMapTheme.value;
-      initConfig.zoom = DEFAULT_ZOOM;
-      break;
-    case WIDGET.CHOROPLETHMAP:
-      initConfig.width = 850;
-      initConfig.height = 400;
-      initConfig.isServerRender = true;
-      initConfig.mapTheme = DefaultMapTheme.value;
-      initConfig.zoom = DEFAULT_ZOOM;
       break;
     default:
       break;

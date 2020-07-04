@@ -8,7 +8,7 @@ import Clear from '@material-ui/icons/Clear';
 import {solidOpts, color} from '../../utils/Colors';
 import {genEffectClickOutside} from '../../utils/EditorHelper';
 import {dimensionGetter, measureGetter} from '../../utils/WidgetHelpers';
-import {SqlParser} from 'infinivis-core';
+import {SqlParser} from '../../core';
 import {
   titleMarginBottom,
   subTitleMarginBottom,

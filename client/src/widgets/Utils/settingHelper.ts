@@ -6,7 +6,7 @@ import {DEFAULT_SORT} from '../../components/settingComponents/Sort';
 import {isRecordExist, QueryCount} from '../../utils/EditorHelper';
 import {dimensionGetter} from '../../utils/WidgetHelpers';
 import {color} from '../../utils/Colors';
-import {SqlParser} from 'infinivis-core';
+import {SqlParser} from '../../core';
 
 import {Dimension, Measure, ColorItem, WidgetConfig} from '../../types';
 type BaseParams = {

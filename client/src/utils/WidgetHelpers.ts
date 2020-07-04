@@ -1,6 +1,6 @@
 import {max, min, format, scaleLinear} from 'd3';
 import {dateFormat} from './Formatters';
-import {SqlParser as Parser} from 'infinivis-core';
+import {SqlParser as Parser} from '../core';
 import {WidgetConfig, Data, Dimension, Measure, Filters} from '../types';
 import {OUT_OUT_CHART, COLUMN_TYPE, WIDGET} from './Consts';
 import {d3TimeTranslation} from './Time';

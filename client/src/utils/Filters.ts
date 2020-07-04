@@ -1,6 +1,6 @@
 import {dimensionBetweenExprGetter, dimensionEqExprGetter} from './WidgetHelpers';
 import {WidgetConfig, Filters, Expression, Dimension, FilterWithDimension} from '../types';
-import {SqlParser} from 'infinivis-core';
+import {SqlParser} from '../core';
 const {parseExpression} = SqlParser;
 export const widgetFiltersGetter = (config: WidgetConfig) => {
   let filters: Array<FilterWithDimension | undefined> = Object.keys(config.filter || {})

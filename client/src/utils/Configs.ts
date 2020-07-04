@@ -6,7 +6,7 @@ import {
   ResolveFilter,
   Crossfilter,
   Transform,
-} from 'infinivis-core';
+} from '../core';
 import {rangeConfigGetter} from './WidgetHelpers';
 import {DEFAULT_COLOR} from '../utils/Colors';
 import {DEFAULT_CHART, COLUMN_TYPE} from './Consts';
