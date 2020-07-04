@@ -155,13 +155,7 @@ const nls = {
   [`label_Header_${WIDGET.HISTOGRAMCHART}`]: 'Histogram',
   [`label_Header_${WIDGET.LINECHART}`]: 'Line',
   [`label_Header_${WIDGET.COMBOCHART}`]: 'Combo',
-  [`label_Header_${WIDGET.POINTMAP}`]: 'PointMap',
-  [`label_Header_${WIDGET.LINEMAP}`]: 'LineMap',
-  [`label_Header_${WIDGET.GEOHEATMAP}`]: 'GeoHeatMap',
-  [`label_Header_${WIDGET.CHOROPLETHMAP}`]: 'ChoroplethMap',
-  [`label_Header_${WIDGET.MAPCHART}`]: 'Map',
   [`label_Header_${WIDGET.RANGECHART}`]: 'Range',
-  [`label_Header_${WIDGET.MAPBOX}`]: 'MapBox',
   [`label_Header_${WIDGET.FILTERWIDGET}`]: 'Filter',
 
   label_widgetEditor_requirements: 'Requirements',

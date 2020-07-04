@@ -153,13 +153,7 @@ const nls = {
   [`label_Header_${WIDGET.HISTOGRAMCHART}`]: '直方图',
   [`label_Header_${WIDGET.LINECHART}`]: '折线图',
   [`label_Header_${WIDGET.COMBOCHART}`]: 'Combo',
-  [`label_Header_${WIDGET.POINTMAP}`]: '点地图',
-  [`label_Header_${WIDGET.LINEMAP}`]: 'LineMap',
-  [`label_Header_${WIDGET.GEOHEATMAP}`]: '热力地图',
-  [`label_Header_${WIDGET.CHOROPLETHMAP}`]: '轮廓图',
-  [`label_Header_${WIDGET.MAPCHART}`]: 'Map',
   [`label_Header_${WIDGET.RANGECHART}`]: '区域图',
-  [`label_Header_${WIDGET.MAPBOX}`]: 'MapBox',
   [`label_Header_${WIDGET.FILTERWIDGET}`]: '筛选器',
 
   label_widgetEditor_requirements: '还需条件',
