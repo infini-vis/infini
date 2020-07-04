@@ -6,7 +6,7 @@ afterEach(() => {
   server.close();
 });
 
-const fakeCorrect = {username: 'zilliz', password: '3595d5ef096da22d69ea8ee23e7c53fa'};
+const fakeCorrect = {username: 'zilliz', password: 'zilliz'};
 const fakeIncorrect = {username: 'zilliz', password: 'wrong'};
 
 describe('POST /auth', () => {

@@ -11,7 +11,6 @@ import {
 import {WidgetConfig} from '../types';
 import {COLUMN_TYPE} from '../utils/Consts';
 import {PointConfigLackLonMeasure, BarConfig, PieConfigLackDimension} from './SpecHelper';
-import PointSetting from '../widgets/PointMap/settings';
 import BarSetting from '../widgets/BarChart/settings';
 import PieSetting from '../widgets/PieChart/settings';
 const columns = [
@@ -97,26 +96,9 @@ const columns = [
   },
 ];
 test('isReadyToRender', () => {
-  const PointReady = isReadyToRender(PointConfigLackLonMeasure, PointSetting);
   const BarReady = isReadyToRender(BarConfig as WidgetConfig, BarSetting);
   const PieReady = isReadyToRender(PieConfigLackDimension as WidgetConfig, PieSetting);
 
-  expect(PointReady).toStrictEqual({
-    sourceReady: {isReady: true},
-    dimensionsReady: {isReady: true, lacks: []},
-    measuresReady: {
-      isReady: false,
-      lacks: [
-        {
-          columnTypes: ['number'],
-          expressions: ['gis_point_lon'],
-          key: 'lon',
-          short: 'longtitude',
-          type: 'required',
-        },
-      ],
-    },
-  });
   expect(BarReady).toStrictEqual({
     sourceReady: {isReady: true},
     dimensionsReady: {isReady: true, lacks: []},

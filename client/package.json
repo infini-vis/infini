@@ -53,7 +53,8 @@
     "start": "chmod +x ./env.sh && ./env.sh && cp env-config.js ./public/ && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "test:cov": "react-scripts test --watchAll=false --coverage"
   },
   "jest": {
     "transformIgnorePatterns": []

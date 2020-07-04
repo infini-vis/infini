@@ -13,7 +13,7 @@
     "build": "webpack",
     "start": "ts-node-dev --respawn --transpileOnly src/index.ts",
     "test": "NODE_ENV=test jest --detectOpenHandles --verbose",
-    "coverage": "NODE_ENV=test jest --detectOpenHandles --verbose --coverage"
+    "test:cov": "NODE_ENV=test jest --detectOpenHandles --verbose --coverage"
   },
   "dependencies": {
     "@koa/cors": "2",
