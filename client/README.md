@@ -22,11 +22,6 @@ npm/yarn start
 yarn build
 ```
 
-* Dockerize
-```
-docker build -t infiniclient:sometag .
-```
-
 * Deployment
 After build, it will generate bunch of javascripts and htmls in build folder, you can serve them using nginx or any other webserver
 
