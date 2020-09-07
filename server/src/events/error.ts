@@ -8,8 +8,11 @@ Error request:
   "message": "Error xyz has occurred"
 }
 */
-export default function error(err, ctx) {
-  console.error(err)
+type EventError = {
+  status: number;
+  message: string;
+}
+export default function error(err: EventError, ctx) {
   // do nothing but format ctx.body for output
   ctx.body = {
     status: 'error',

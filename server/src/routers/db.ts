@@ -3,7 +3,7 @@ import {
   getTableDetail,
   getAllTables,
   getAllTablesDetail,
-} from "../services/db";
+} from "../services/query";
 import { Type } from "class-transformer";
 
 // request type
@@ -72,10 +72,10 @@ export default function query(router) {
     // validator Request body Type
     await ctx.validate(TableDetail);
 
-    const { name, id } = ctx.request.body;
-    const client = await ctx.db.getDbClient(id);
+    const { name } = ctx.request.body;
+    const client = ctx.db.getClient();
 
-    ctx.body = await getTableDetail(name, client);
+    ctx.body = await getTableDetail(client, name);
     await next();
   });
 
@@ -84,8 +84,7 @@ export default function query(router) {
     // validator Request body Type
     await ctx.validate(AllTables);
 
-    const { id } = ctx.request.body;
-    const client = await ctx.db.getDbClient(id);
+    const client = ctx.db.getClient();
 
     ctx.body = await getAllTables(client);
     await next();
@@ -96,10 +95,10 @@ export default function query(router) {
     // validator Request body Type
     await ctx.validate(Tables);
 
-    const { id, tables } = ctx.request.body;
-    const client = await ctx.db.getDbClient(id);
+    const { tables } = ctx.request.body;
+    const client = ctx.db.getClient();
 
-    ctx.body = await getAllTablesDetail(tables, client);
+    ctx.body = await getAllTablesDetail(client, tables);
     await next();
   });
 
@@ -108,15 +107,14 @@ export default function query(router) {
     // validator Request body Type
     await ctx.validate(MultipleQueryBody);
 
-    const { query, id } = ctx.request.body;
-    const client = await ctx.db.getDbClient(id);
+    const { query } = ctx.request.body;
 
     let result = [];
 
     for (let i = 0; i < query.length; i++) {
       let { sql, id, timestamp = Date.now() } = query[i];
       let err = false;
-      let _res = await ctx.db.query(sql, client);
+      let _res = await ctx.db.query(sql);
 
       result.push({
         id,

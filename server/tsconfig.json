@@ -8,8 +8,8 @@
     "sourceMap": false,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
   },
   "include": ["./src/**/*", "./global.d.ts"],
-  "exclude": ["node_modules", "test", "dist", "**/*spec.ts", "src/**/*.test.ts"]
+  "exclude": ["node_modules", "dist"]
 }

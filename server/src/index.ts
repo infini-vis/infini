@@ -81,15 +81,19 @@ app.use((ctx) => {
 
 // listening to port
 export const server: any = app.listen(port, async () => {
-  const defaultDB = {
-    type: "postgres",
+  const dbParams = {
     host: process.env.INFINI_HOST || "localhost",
-    username: process.env.INFINI_USER || "postgres",
+    user: process.env.INFINI_USER || "postgres",
     password: process.env.INFINI_PWD || "docker",
     port: process.env.INFINI_PORT || 5432,
     database: process.env.INFINI_DB || "postgres",
   };
-  const { id } = await app.context.db.setupClient(defaultDB);
-  Logger(`inifini api server started at ${port}`);
-  Logger(`Connected to database: ${id}`);
+
+  try {
+    Logger(`Connecting to ${JSON.stringify(dbParams)}`);
+    await app.context.db.setClient("postgres", dbParams);
+    Logger(`inifini api server started at ${port}`);
+  } catch (error) {
+    Logger(`Connected to database: ${error}`);
+  }
 });

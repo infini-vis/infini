@@ -1,13 +1,23 @@
-import * as crypto from 'crypto';
-import {Pool as postgresPool, types} from 'pg';
-import {Logger} from '../utils';
-types.setTypeParser(1114, stringValue => {
-  return stringValue;
-});
+import { Pool as postgresPool, types } from "pg";
+import { Logger } from "../utils";
+// types.setTypeParser(1114, (stringValue) => {
+//   return stringValue;
+// });
 
-const _postgresPoolCreator = dbParams => {
-  const pool = new postgresPool({
-    user: dbParams.username,
+type DBParams = {
+  host: string;
+  user: string;
+  password: string;
+  port: number;
+  database: string;
+};
+
+export const postgresPoolCreator = (
+  dbParams: DBParams,
+  poolCreator = postgresPool
+) => {
+  const pool = new poolCreator({
+    user: dbParams.user,
     host: dbParams.host,
     database: dbParams.database,
     password: dbParams.password,
@@ -17,8 +27,13 @@ const _postgresPoolCreator = dbParams => {
   return pool;
 };
 
-const _poolCreatorMap = {
-  postgres: _postgresPoolCreator,
+const _poolCreatorMap = { postgres: postgresPoolCreator };
+
+const getPoolCreator = (type: string, poolCreator?: Function) => {
+  if (!_poolCreatorMap[type]) {
+    return null;
+  }
+  return poolCreator ? poolCreator : _poolCreatorMap[type];
 };
 
 // database middleware
@@ -26,87 +41,67 @@ const _poolCreatorMap = {
 // then return next() as middleware
 export default function dbMixin(ctx) {
   ctx.db = {
-    configs: new Map(),
-    pools: new Map(),
-    lastClientId: '',
+    client: null,
 
-    hash: function(dbId: string): string {
-      return crypto
-        .createHash('md5')
-        .update(dbId)
-        .digest('hex');
-    },
-
-    set: function(dbParams) {
-      const {type, host, username, password, database, port} = dbParams;
-      const dbId = [type, host, username, database, password, port].join('/*/');
-      console.log('hash', dbId);
-      const hash = ctx.db.hash(dbId);
-
-      Logger(`set up db config ${type}: ${host} u:${username} p:${port}`);
-
-      // update run time db params
-      ctx.db.configs.set(hash, {id: hash, ...dbParams});
-      return hash;
-    },
-
-    getLastConfig: function() {
-      return ctx.db.configs.get(ctx.db.lastClientId);
-    },
-
-    // get database client
-    setupClient: async function setupClient(dbParams) {
-      const poolCreator = _poolCreatorMap[dbParams.type];
-      const hash = ctx.db.set(dbParams);
-
-      // if we have set the client, return the client
-      if (ctx.db.pools.has(hash)) {
-        Logger(`return cached db client ${hash}`);
-        ctx.db.lastClientId = hash;
-        return {id: hash, client: ctx.db.pools.get(hash)};
-      }
-
-      // otherwise create a new pool
-      if (typeof poolCreator === 'function') {
+    _createPool: function _createPool(
+      type: string,
+      dbParams: DBParams,
+      poolCreator?: Function
+    ) {
+      const pc = getPoolCreator(type, poolCreator);
+      if (typeof pc === "function") {
         // create a pool
-        const pool = poolCreator(dbParams);
+        const pool = pc(dbParams);
 
         // error event
-        pool.on('error', err => {
-          Logger('Unexpected error on idle client', err);
+        pool.on("error", (err) => {
+          ctx.throw(503, err);
+          return;
         });
 
-        // store the connection
-        ctx.db.set(dbParams);
-        ctx.db.pools.set(hash, pool);
-        Logger(`create new db client ${JSON.stringify(dbParams)}`);
-        ctx.db.lastClientId = hash;
-        // return the pool
-        return {id: hash, client: pool};
+        return pool;
+      } else {
+        return null;
       }
-      // avoid error
-      return () => {};
     },
 
-    getDbClient: function getDbClient(id) {
-      const client = ctx.db.pools.get(id);
+    // set database client
+    setClient: async function setClient(
+      type: string,
+      dbParams: DBParams,
+      poolCreator?: Function
+    ) {
+      // create a pool
+      const pool = this._createPool(type, dbParams, poolCreator);
+
+      if (!pool) {
+        ctx.throw(503, "Unsupported database type");
+      }
+
+      // store the connection
+      Logger(`create new db client ${JSON.stringify(dbParams)}`);
+      // store the client
+      this.client = pool;
+      // return the pool
+      return pool;
+    },
+
+    getClient: function getClient() {
+      const client = this.client;
       if (!client) {
-        ctx.throw(503, 'database not configured');
+        ctx.throw(503, "no connection found");
       }
       return client;
     },
 
-    query: async function(sql: string, dbClient) {
-      const result = await dbClient
+    query: async function query(sql: string) {
+      if (!this.client) {
+        ctx.throw(503, "no connection found");
+        return;
+      }
+      const result = await this.client
         .query(sql)
-        .then(res => {
-          const {rows} = res;
-          const key0 = Object.keys(rows[0])[0];
-          const buffer = rows[0][key0];
-          const isImageBuffer = Buffer.isBuffer(buffer);
-          if (isImageBuffer) {
-            res.rows = [`data:image/png;base64,` + buffer.toString('base64')];
-          }
+        .then((res) => {
           return res || {};
         })
         .catch((e: any) => {
